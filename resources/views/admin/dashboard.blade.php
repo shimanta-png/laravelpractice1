@@ -1,3 +1,5 @@
+<x-header />
+
 <link rel="stylesheet" href="{{ asset('assets/admin.css') }}">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -7,8 +9,6 @@
 <div class="sidebar">
   <a class="active" href="{{ url('/admin') }}">All Posts</a>
   <a href="{{ url('/post-new') }}">New Post</a>
-  {{-- <a href="#contact">Edit/Delete</a>
-  <a href="#about">Quit</a> --}}
 </div>
 
 <br>
@@ -52,6 +52,7 @@
     </div>
   </div>
 
-
-
 </div>
+
+
+<x-footer />

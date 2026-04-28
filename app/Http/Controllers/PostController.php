@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|string',
-            'content' => 'required|string',
+            'post_content' => 'required',
             'status' => 'required|integer'
         ]);
 
@@ -25,7 +25,7 @@ class PostController extends Controller
 
         $post = new Post();
         $post->title = $request->title;
-        $post->content = $request->content;
+        $post->content = $request->post_content;
         $post->image_url = $form_file;
         $post->userid = Auth::id();
         $post->status = $request->status;
@@ -34,21 +34,26 @@ class PostController extends Controller
         return redirect()->route('admin')->with('status', 'Post saved successfully');
     }
 
-    public function new(){
+    // public function new(){
+    //     if(Auth::check()){
+    //         return view('admin.new');
+    //     }else{
+    //         return view('login');
+    //     }
+    // }
+
+    public function dashboard(){
         if(Auth::check()){
-            return view('admin.new');
+            $posts = Post::where('userid', Auth::id())->get();
+            return view('admin.dashboard', ['posts'=>$posts]);
         }else{
             return view('login');
         }
     }
 
-    public function dashboard(){
-        if(Auth::check()){
-            $posts = Post::all();
-            return view('admin.dashboard', ['posts'=>$posts]);
-        }else{
-            return view('login');
-        }
+    public function index_posts(){
+        $posts = Post::get();
+        return view('index', ['posts' => $posts]);
     }
 
 }
