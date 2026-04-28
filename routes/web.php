@@ -25,3 +25,4 @@ Route::get('/post-new', function(){
 Route::post('/post-save',[PostController::class, 'save']);
 Route::get('/post/{slug}', [PostController::class, 'post_view']);
 Route::get('/search', [PostController::class, 'search_res']);
+Route::get('/export-pdf', [PostController::class, 'generate_pdf']);

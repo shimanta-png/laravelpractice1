@@ -39,6 +39,9 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/admin') }}">Admin</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/export-pdf') }}">Export pdf</a>
+          </li>
           @endauth
         </ul>
         <form class="d-flex" action="{{ url("/search") }}" method="get">

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
 use Ramsey\Uuid\Type\Integer;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PostController extends Controller
 {
@@ -72,4 +73,10 @@ class PostController extends Controller
         return view('search', ['posts' => $posts]);
     }
 
+    public function generate_pdf(){
+        $posts = Post::all();
+        // return view('pdf', ['posts'=>$posts]);
+        $pdf = Pdf::loadView('pdf', ['posts'=>$posts]);
+        return $pdf->download();
+    }
 }
