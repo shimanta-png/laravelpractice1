@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
+use Ramsey\Uuid\Type\Integer;
 
 class PostController extends Controller
 {
@@ -52,8 +53,23 @@ class PostController extends Controller
     }
 
     public function index_posts(){
-        $posts = Post::get();
+        $posts = Post::paginate(3);
         return view('index', ['posts' => $posts]);
+    }
+
+    public function post_view(string $slug){
+        if(Post::where('slug', $slug)->get()->count()){
+            $post = Post::where('slug', $slug)->first();
+            return view('post', ['post'=>$post]);
+        }else{
+            abort(404);
+        }
+    }
+
+    public function search_res(Request $request){
+        $search = $request->input('query');
+        $posts = Post::whereAny(['title','slug','content'],'LIKE',"%$search%")->get();
+        return view('search', ['posts' => $posts]);
     }
 
 }

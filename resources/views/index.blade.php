@@ -21,13 +21,17 @@
                         <p class="card-text">@if($post->content)
                         {{ substr($post->content, 0, 100)  }}   
                         @endif</p>
-                        <button class="btn btn-dark">read more</button>
+                        <a href="{{ url('/post/'.$post->slug) }}">
+                            <button class="btn btn-dark">read more</button>
+                        </a>
                     </div>
                 </div>
             </div>
         @endforeach
 
-
+        <div>
+            {{ $posts->links() }}
+        </div>    
 
     </div>
 </div>

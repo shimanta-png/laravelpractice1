@@ -23,3 +23,5 @@ Route::get('/post-new', function(){
     return view('admin.new');
 })->middleware('auth');
 Route::post('/post-save',[PostController::class, 'save']);
+Route::get('/post/{slug}', [PostController::class, 'post_view']);
+Route::get('/search', [PostController::class, 'search_res']);
